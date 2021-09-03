@@ -1,23 +1,22 @@
 from ikomia import core, dataprocess
 import copy
-# Your imports below
 import os
 import cv2
-import CovidNet_inference
+from CovidNet.CovidNet_inference import Covidnet
 
 
 # --------------------
 # - Class to handle the process parameters
 # - Inherits core.CProtocolTaskParam from Ikomia API
 # --------------------
-class CovidNetParam(core.CProtocolTaskParam):
+class CovidNetParam(core.CWorkflowTaskParam):
 
     def __init__(self):
-        core.CProtocolTaskParam.__init__(self)
+        core.CWorkflowTaskParam.__init__(self)
         # Place default value initialization here
         self.model_path = os.path.dirname(os.path.realpath(__file__)) + "/models/covid-net.pb"
 
-    def setParamMap(self, paramMap):
+    def setParamMap(self, param_map):
         # Set parameters values from Ikomia application
         # Parameters values are stored as string and accessible like a python dict
         # Example : self.windowSize = int(paramMap["windowSize"])
@@ -26,23 +25,23 @@ class CovidNetParam(core.CProtocolTaskParam):
     def getParamMap(self):
         # Send parameters values to Ikomia application
         # Create the specific dict structure (string container)
-        paramMap = core.ParamMap()
+        param_map = core.ParamMap()
         # Example : paramMap["windowSize"] = str(self.windowSize)
-        return paramMap
+        return param_map
 
 
 # --------------------
 # - Class which implements the process
 # - Inherits core.CProtocolTask or derived from Ikomia API
 # --------------------
-class CovidNetProcess(dataprocess.CImageProcess2d):
+class CovidNetProcess(dataprocess.C2dImageTask):
 
     def __init__(self, name, param):
-        dataprocess.CImageProcess2d.__init__(self, name)
+        dataprocess.C2dImageTask.__init__(self, name)
         # Add graphics output
         self.addOutput(dataprocess.CGraphicsOutput())
         # Add numeric output
-        self.addOutput(dataprocess.CDblFeatureIO())
+        self.addOutput(dataprocess.CNumericIO())
 
         # Create parameters class
         if param is None:
@@ -51,7 +50,7 @@ class CovidNetProcess(dataprocess.CImageProcess2d):
             self.setParam(copy.deepcopy(param))
 
         param = self.getParam()
-        self.covid_model = CovidNet_inference.Covidnet(model_path=param.model_path)
+        self.covid_model = Covidnet(model_path=param.model_path)
 
         # Load class names
         self.class_names = []
@@ -120,10 +119,10 @@ class CovidNetProcess(dataprocess.CImageProcess2d):
 # - Factory class to build process object
 # - Inherits dataprocess.CProcessFactory from Ikomia API
 # --------------------
-class CovidNetProcessFactory(dataprocess.CProcessFactory):
+class CovidNetProcessFactory(dataprocess.CTaskFactory):
 
     def __init__(self):
-        dataprocess.CProcessFactory.__init__(self)
+        dataprocess.CTaskFactory.__init__(self)
         # Set process information as string here
         self.info.name = "CovidNet"
         self.info.shortDescription = "A tailored Deep Convolutional Neural Network Design " \

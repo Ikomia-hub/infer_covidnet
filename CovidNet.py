@@ -1,6 +1,4 @@
 from ikomia import dataprocess
-import CovidNet_process as processMod
-import CovidNet_widget as widgetMod
 
 
 # --------------------
@@ -13,9 +11,11 @@ class CovidNet(dataprocess.CPluginProcessInterface):
         dataprocess.CPluginProcessInterface.__init__(self)
 
     def getProcessFactory(self):
+        from CovidNet.CovidNet_process import CovidNetProcessFactory
         # Instantiate process object
-        return processMod.CovidNetProcessFactory()
+        return CovidNetProcessFactory()
 
     def getWidgetFactory(self):
+        from CovidNet.CovidNet_widget import CovidNetWidgetFactory
         # Instantiate associated widget object
-        return widgetMod.CovidNetWidgetFactory()
+        return CovidNetWidgetFactory()

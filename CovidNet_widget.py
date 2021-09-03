@@ -1,7 +1,7 @@
 from ikomia import utils, core, dataprocess
-import CovidNet_process as processMod
-
-#PyQt GUI framework
+from ikomia.utils import qtconversion
+from CovidNet.CovidNet_process import CovidNetParam
+# PyQt GUI framework
 from PyQt5.QtWidgets import *
 
 
@@ -9,20 +9,20 @@ from PyQt5.QtWidgets import *
 # - Class which implements widget associated with the process
 # - Inherits core.CProtocolTaskWidget from Ikomia API
 # --------------------
-class CovidNetWidget(core.CProtocolTaskWidget):
+class CovidNetWidget(core.CWorkflowTaskWidget):
 
     def __init__(self, param, parent):
-        core.CProtocolTaskWidget.__init__(self, parent)
+        core.CWorkflowTaskWidget.__init__(self, parent)
 
         if param is None:
-            self.parameters = processMod.CovidNetParam()
+            self.parameters = CovidNetParam()
         else:
             self.parameters = param
 
         # Create layout : QGridLayout by default
-        self.gridLayout = QGridLayout()
+        self.grid_layout = QGridLayout()
         # PyQt -> Qt wrapping
-        layout_ptr = utils.PyQtToQt(self.gridLayout)
+        layout_ptr = qtconversion.PyQtToQt(self.grid_layout)
 
         # Set widget layout
         self.setLayout(layout_ptr)
@@ -37,10 +37,10 @@ class CovidNetWidget(core.CProtocolTaskWidget):
         self.emitApply(self.parameters)
 
 
-#--------------------
-#- Factory class to build process widget object
-#- Inherits dataprocess.CWidgetFactory from Ikomia API
-#--------------------
+# --------------------
+# - Factory class to build process widget object
+# - Inherits dataprocess.CWidgetFactory from Ikomia API
+# --------------------
 class CovidNetWidgetFactory(dataprocess.CWidgetFactory):
 
     def __init__(self):
