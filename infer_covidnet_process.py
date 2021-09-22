@@ -2,7 +2,7 @@ from ikomia import core, dataprocess
 import copy
 import os
 import cv2
-from CovidNet.CovidNet_inference import Covidnet
+from infer_covidnet.covidnet import CovidNet
 
 
 # --------------------
@@ -50,7 +50,7 @@ class CovidNetProcess(dataprocess.C2dImageTask):
             self.setParam(copy.deepcopy(param))
 
         param = self.getParam()
-        self.covid_model = Covidnet(model_path=param.model_path)
+        self.covid_model = CovidNet(model_path=param.model_path)
 
         # Load class names
         self.class_names = []
@@ -124,7 +124,7 @@ class CovidNetProcessFactory(dataprocess.CTaskFactory):
     def __init__(self):
         dataprocess.CTaskFactory.__init__(self)
         # Set process information as string here
-        self.info.name = "CovidNet"
+        self.info.name = "infer_covidnet"
         self.info.shortDescription = "A tailored Deep Convolutional Neural Network Design " \
                                     "for detection of COVID-19 cases from chest radiography images."
         self.info.description = "The COVID-19 pandemic continues to have a devastating effect on the health " \

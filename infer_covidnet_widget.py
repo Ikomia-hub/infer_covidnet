@@ -1,6 +1,6 @@
 from ikomia import utils, core, dataprocess
 from ikomia.utils import qtconversion
-from CovidNet.CovidNet_process import CovidNetParam
+from infer_covidnet.infer_covidnet_process import CovidNetParam
 # PyQt GUI framework
 from PyQt5.QtWidgets import *
 
@@ -46,7 +46,7 @@ class CovidNetWidgetFactory(dataprocess.CWidgetFactory):
     def __init__(self):
         dataprocess.CWidgetFactory.__init__(self)
         # Set the name of the process -> it must be the same as the one declared in the process factory class
-        self.name = "CovidNet"
+        self.name = "infer_covidnet"
 
     def create(self, param):
         # Create widget object

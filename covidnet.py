@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 
 
-class Covidnet():
+class CovidNet:
     def __init__(self, model_path):
         # The file path of model
         self.model_path = model_path
