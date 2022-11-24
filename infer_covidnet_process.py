@@ -1,4 +1,4 @@
-from ikomia import core, dataprocess
+from ikomia import utils, core, dataprocess
 import copy
 import os
 import cv2
@@ -50,6 +50,12 @@ class CovidNetProcess(dataprocess.C2dImageTask):
             self.setParam(copy.deepcopy(param))
 
         param = self.getParam()
+
+        if not os.path.exists(param.model_path):
+            print("Downloading model, please wait...")
+            model_url = utils.getModelHubUrl() + "/" + self.name + "/covid-net.pb"
+            self.download(model_url, param.model_path)
+
         self.covid_model = CovidNet(model_path=param.model_path)
 
         # Load class names
@@ -152,7 +158,7 @@ class CovidNetProcessFactory(dataprocess.CTaskFactory):
                                 "who need it the most."
         # relative path -> as displayed in Ikomia application process tree
         self.info.path = "Plugins/Python/Classification"
-        self.info.version = "1.0.0"
+        self.info.version = "1.1.0"
         self.info.iconPath = "icon/icon.png"
         self.info.authors = "Linda Wang, Alexander Wong"
         self.info.article = "COVID-Net: A Tailored Deep Convolutional Neural Network Design for Detection " \
