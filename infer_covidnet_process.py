@@ -53,7 +53,7 @@ class CovidNetProcess(dataprocess.C2dImageTask):
 
         if not os.path.exists(param.model_path):
             print("Downloading model, please wait...")
-            model_url = utils.getModelHubUrl() + "/" + self.name + "/covid-net.pb"
+            model_url = utils.get_model_hub_url() + "/" + self.name + "/covid-net.pb"
             self.download(model_url, param.model_path)
 
         self.covid_model = CovidNet(model_path=param.model_path)
