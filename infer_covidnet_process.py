@@ -132,30 +132,7 @@ class CovidNetProcessFactory(dataprocess.CTaskFactory):
         # Set process information as string here
         self.info.name = "infer_covidnet"
         self.info.short_description = "A tailored Deep Convolutional Neural Network Design " \
-                                    "for detection of COVID-19 cases from chest radiography images."
-        self.info.description = "The COVID-19 pandemic continues to have a devastating effect on the health " \
-                                "and well-being of the global population. A critical step in the fight against " \
-                                "COVID-19 is effective screening of infected patients, with one of the key screening " \
-                                "approaches being radiological imaging using chest radiography. It was found in early " \
-                                "studies that patients present abnormalities in chest radiography images that are characteristic " \
-                                "of those infected with COVID-19. Motivated by this, a number of artificial intelligence (AI) " \
-                                "systems based on deep learning have been proposed and results have been shown to be quite promising " \
-                                "in terms of accuracy in detecting patients infected with COVID-19 using chest radiography images. " \
-                                "However, to the best of the authors’ knowledge, these developed AI systems have been closed source " \
-                                "and unavailable to the research community for deeper understanding and extension, and unavailable " \
-                                "for public access and use. Therefore, in this study we introduce COVID-Net, a deep convolutional " \
-                                "neural network design tailored for the detection of COVID-19 cases from chest  radiography  images " \
-                                "that is open source and available to the general public. We also describe the chest radiography dataset " \
-                                "leveraged to train COVID-Net, which we will refer to as COVIDx and is comprised of 16,756 chest " \
-                                "radiography images across 13,645 patient cases from two open access data repositories. " \
-                                "Furthermore, we investigate how COVID-Net makes predictions using an explainability method " \
-                                "in an attempt to gain deeper insights into critical factors associated with COVID cases, " \
-                                "which can aid clinicians in improved screening. By no means a production-ready solution, " \
-                                "the hope is that the open access COVID-Net, along with the description on constructing " \
-                                "the open source COVIDx dataset, will be leveraged and build upon by both researchers and " \
-                                "citizen data scientists alike to accelerate the development of highly accurate yet practical " \
-                                "deep learning solutions for detecting COVID-19 cases and accelerate treatment of those " \
-                                "who need it the most."
+                                      "for detection of COVID-19 cases from chest radiography images."
         # relative path -> as displayed in Ikomia application process tree
         self.info.path = "Plugins/Python/Classification"
         self.info.version = "1.2.0"
@@ -167,9 +144,9 @@ class CovidNetProcessFactory(dataprocess.CTaskFactory):
         self.info.year = 2020
         self.info.license = "GNU Affero General Public License 3.0."
         self.info.documentation_link = "https://arxiv.org/pdf/2003.09871.pdf"
-        self.info.repository = "https://github.com/lindawangg/COVID-Net"
+        self.info.repository = "https://github.com/Ikomia-hub/infer_covidnet"
+        self.info.original_repository = "https://github.com/lindawangg/COVID-Net"
         self.info.keywords = "covid-19,coronavirus,x-ray,radiography,chest,lung,dnn"
-
 
     def create(self, param=None):
         # Create process object
