@@ -147,6 +147,8 @@ class CovidNetProcessFactory(dataprocess.CTaskFactory):
         self.info.repository = "https://github.com/Ikomia-hub/infer_covidnet"
         self.info.original_repository = "https://github.com/lindawangg/COVID-Net"
         self.info.keywords = "covid-19,coronavirus,x-ray,radiography,chest,lung,dnn"
+        self.info.algo_type = core.AlgoType.INFER
+        self.info.algo_tasks = "CLASSIFICATION"
 
     def create(self, param=None):
         # Create process object
