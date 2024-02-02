@@ -135,7 +135,7 @@ class CovidNetProcessFactory(dataprocess.CTaskFactory):
                                       "for detection of COVID-19 cases from chest radiography images."
         # relative path -> as displayed in Ikomia application process tree
         self.info.path = "Plugins/Python/Classification"
-        self.info.version = "1.2.0"
+        self.info.version = "1.2.1"
         self.info.icon_path = "icon/icon.png"
         self.info.authors = "Linda Wang, Alexander Wong"
         self.info.article = "COVID-Net: A Tailored Deep Convolutional Neural Network Design for Detection " \
